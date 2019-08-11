@@ -1,0 +1,43 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "gRpcDemo";
+
+package LogsRpc;
+
+
+service Loger {
+  rpc GetLogList (LogRequest) returns (LogReply) {}
+  rpc GetLogList2 (LogRequest) returns (LogReply2) {}
+  rpc GetLogItem (LogItemRequest) returns (LogItemReply) {}
+}
+
+message LogRequest {
+  string date = 1;
+  int32 count = 2;
+}
+
+message LogReply {
+  repeated LogContent Items = 1;
+}
+
+message LogReply2 {
+	bytes Items = 1;
+}
+
+message LogItemRequest {
+	string id = 1;
+}
+
+message LogItemReply {
+	LogContent item = 1;
+}
+
+message LogContent {
+	string Id = 1;
+    google.protobuf.Timestamp Date = 2;
+    string Level = 3;
+    string Logger = 4;
+    string Message = 5;
+}
